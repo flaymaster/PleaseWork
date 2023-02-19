@@ -1,26 +1,17 @@
-name: My Pipeline
+name: Test code
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.x  # Replace with your Python version
-      - name: Install dependencies
-        run: pip install -r requirements.txt  # Replace with your requirements file
-      - name: Build Docker image
-        run: |
-          docker build -t my-image .
-      - name: Save Docker image
-        run: |
-          docker save my-image > my-image.tar
-      - name: Upload Docker image to S3
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Test code
+      run: python GeoIP.py
