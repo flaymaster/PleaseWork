@@ -14,4 +14,4 @@ jobs:
       run: pip install requests
 
     - name: Test code
-      run: python your_file_name.py
+      run: python GeoIP.py
