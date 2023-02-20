@@ -33,12 +33,18 @@ jobs:
         push: false
         tags: firstappever:yomsheni
 
-    - name: Install and configure AWS CLI
-      uses: aws-actions/configure-aws-cli@v1
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AKIAZHBJPMYH5A2JWYHZ }}
         aws-secret-access-key: ${{ secrets.zGtoG6qrpA3p0GceDn71RJpZx6eDsUjAtLpiaYut }}
         aws-region: EU (Frankfurt) eu-central-1
-
+   
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build Docker image
+   
+   
     - name: Push Docker image to S3 bucket
       run: aws s3 cp firstappever:yomsheni s3://tomermywebsite/firstappever:yomsheni
