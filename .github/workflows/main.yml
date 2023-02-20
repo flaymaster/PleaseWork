@@ -1,4 +1,4 @@
-name: Test code
+name: Test code and build Docker image
 
 on: push
 
@@ -15,3 +15,30 @@ jobs:
 
     - name: Test code
       run: python GeoIP.py
+
+  build:
+    needs: test
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: dockerfile
+        push: false
+        tags: firstappever:yomsheni
+
+    - name: Install and configure AWS CLI
+      uses: aws-actions/configure-aws-cli@v1
+      with:
+        aws-access-key-id: ${{ AKIAZHBJPMYHW2BFBQU3 }}
+        aws-secret-access-key: ${{ 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 }}
+        aws-region: EU (Frankfurt) eu-central-1
+
+    - name: Push Docker image to S3 bucket
+      run: aws s3 cp firstappever:yomsheni s3://tomermywebsite/firstappever:yomsheni
