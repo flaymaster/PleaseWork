@@ -36,8 +36,8 @@ jobs:
     - name: Install and configure AWS CLI
       uses: aws-actions/configure-aws-cli@v1
       with:
-        aws-access-key-id: ${{ AKIAZHBJPMYHW2BFBQU3 }}
-        aws-secret-access-key: ${{ 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 }}
+        aws-access-key-id: ${{ AKIAZHBJPMYHW2BFBQU3. }}
+        aws-secret-access-key: ${{ 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. }}
         aws-region: EU (Frankfurt) eu-central-1
 
     - name: Push Docker image to S3 bucket
